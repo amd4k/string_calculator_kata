@@ -8,7 +8,9 @@ class StringCalculator
 
     private
     def parse_num(numbers)
-        num_arr = numbers.split(',')
+        normalized_numbers = numbers.gsub("\n", ",")
+        num_arr = normalized_numbers.split(',')
+        p num_arr
         num_arr.map(&:to_i)
     end
 end
