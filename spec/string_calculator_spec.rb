@@ -11,7 +11,7 @@ RSpec.describe StringCalculator do
     end
 
     context 'when a single number is provided' do
-        it 'returns the numbers itself' do
+        it 'returns the number itself' do
            expect(calculator.add('1')).to eq(1)
         end
     end
@@ -47,6 +47,10 @@ RSpec.describe StringCalculator do
     context 'when negative numbers are provided' do
         it 'raises an error' do
             expect { calculator.add("1,-2,-3") }.to raise_error(ArgumentError, "negative numbers not allowed: -2, -3" )
+        end
+
+         it 'raises an error even if custom delimiter is used' do
+            expect { calculator.add("//*\n1*2,-5\n3,7,9*400,-20*5") }.to raise_error(ArgumentError, "negative numbers not allowed: -5, -20" )
         end
     end
 

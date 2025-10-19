@@ -1,12 +1,18 @@
 class StringCalculator
     def add(numbers)
         return 0 if numbers.empty?
-        return custom_delimiter(numbers).sum if numbers.start_with?("//")
-        parsed = parse_num(numbers)
-        if parsed.any? { |num| num < 0 }
-            negatives = parsed.select { |num| num < 0 }
+        
+        parsed = if numbers.start_with?("//")
+            custom_delimiter(numbers)
+        else
+            parse_num(numbers)
+        end
+
+        negatives = parsed.select { |num| num < 0 }
+        unless negatives.empty?
             raise ArgumentError, "negative numbers not allowed: #{negatives.join(', ')}"
         end
+
         parsed.sum
     end
 
